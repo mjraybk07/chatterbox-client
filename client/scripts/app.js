@@ -9,6 +9,7 @@ let message = {
 const app = {
   server: 'http://parse.rtp05.hackreactor.com/chatterbox/classes/messages',
 };
+
 app.init = () => {
 
 };
@@ -31,7 +32,6 @@ app.send = (message) => {
 };
 
 app.fetch = () => {
-  console.log('inside fetch => ');
   $.ajax({
     url: app.server,
     type: 'GET',
@@ -47,17 +47,24 @@ app.fetch = () => {
 
 // should be able to clear messages from the DOM
 app.clearMessages = () => {
-
+  $('#chats').remove();
 };
+
+
 
 // should be able to add messages to the DOM
 app.renderMessage = (message) => {
-
+  console.log('renderMessage: ', JSON.stringify(message));
+  let listElements = `<span class="chat">
+                        <p class="username">${message.username}</p>
+                        <p class="message">${message.text}</p>
+                      </span>`;
+  $('#chats').prepend(listElements);
 };
 
 // should be able to add rooms to the DOM
 app.renderRoom = (room) => {
-
+  //$('#roomSelect').
 };
 
 // should add a friend upon clicking their username
