@@ -7,7 +7,7 @@ let message = {
 };
 
 const app = {
-  server: 'http://parse.rtp05.hackreactor.com/chatterbox/classes/messages',
+  server: 'http://parse.rtp.hackreactor.com/chatterbox/classes/messages',
 };
 
 app.init = () => {
