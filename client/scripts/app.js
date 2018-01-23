@@ -7,7 +7,7 @@ let message = {
 };
 
 const app = {
-  server: 'http://parse.rtp.hackreactor.com/chatterbox/classes/messages',
+  server: 'http://parse.rpt.hackreactor.com/chatterbox/classes/messages',
 };
 
 app.init = () => {
@@ -15,14 +15,15 @@ app.init = () => {
 };
 
 app.send = (message) => {
+
   $.ajax({
     // This is the url you should use to communicate with the parse API server.
     url: app.server,
     type: 'POST',
-    data: message,
+    data: JSON.stringify(message),
     contentType: 'application/json',
     success: (data) => {
-      console.log('chatterbox: Message sent');
+      console.log('chatterbox: Message sent', data);
     },
     error: (data) => {
       // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
@@ -32,14 +33,16 @@ app.send = (message) => {
 };
 
 app.fetch = () => {
+
   $.ajax({
     url: app.server,
     type: 'GET',
     contentType: 'application/json',
+    data: {order: '-createdAt'},
     success: (data) => {
       console.log('chatterbox: Message received', data);
     },
-    error: (data) =>{
+    error: (data) => {
       console.error('chatterbox: Failed to get message', data);
     }
   });
@@ -76,4 +79,6 @@ app.handleUsernameClick = (username) => {
 app.handleSubmit = () => {
 
 };
+
+console.log('calling fetch... ', app.fetch());
 
